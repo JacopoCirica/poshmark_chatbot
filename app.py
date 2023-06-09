@@ -30,8 +30,8 @@ average_price_sold='average price sold out items'
 latest_items='latest items'
 items_old='items old'
 app = Flask(__name__)
-openai.api_key = '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'
-os.environ['OPENAI_API_KEY'] = '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'
+openai.api_key = ''
+os.environ['OPENAI_API_KEY'] = ''
 
 previous_message='ok'
 @app.route('/')
