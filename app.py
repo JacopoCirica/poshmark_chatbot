@@ -124,6 +124,7 @@ def query():
 @app.route("/predict", methods=['POST'])
 def predict():
     text = request.get_json().get("message")
+    items= request.get_json().get("items")
     print(text)
     time.sleep(1.1) #diamo una pausa to avoid the overloading
     #extract the data about the closet
@@ -131,8 +132,9 @@ def predict():
     z = 1
     data_list = []  # list to store all data items
 
-# extract from each page the items of the closet
-    while True:
+
+    # extract from each page the items of the closet
+    while z <items:
     
         print(f"Page num is {z}")
         url = "https://poshmark.p.rapidapi.com/closet"
@@ -158,15 +160,8 @@ def predict():
 
                 # append data to list
                 data_list.append({'Title_Item': title, 'Price': price, 'Original_Price': original_price, 'description':description, 'time_of_published':published_at, 'status':status})
-                
-        
             
-            if response_data['next_page'] is not None:
-                z += 1
-                time.sleep(1.01)
-            else:
-                break
-        
+        z=z+1
 
     # create DataFrame from data list
     global df
